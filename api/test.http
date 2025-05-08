@@ -1,2 +1,2 @@
 ### Gtest 
-GET  http://localhost:8008
+GET  http://localhost:8008/api
