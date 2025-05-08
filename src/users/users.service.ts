@@ -1,12 +1,12 @@
-import { Get, Injectable } from "@nestjs/common";
+import { Get, Inject, Injectable } from '@nestjs/common';
+import { Model } from 'mongoose';
+import { Users } from './interfaces/user.interface';
 
 @Injectable()
+export class UsersService {
+  constructor(@Inject('USERS_MODEL') private userModel: Model<Users>) {}
 
-export class UsersService{
-  constructor(){}
-
-  findAll():string{
-    return 'get all users'
+  findAll(): Promise<Users[]> {
+    return this.userModel.find();
   }
-
 }
