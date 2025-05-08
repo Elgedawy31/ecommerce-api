@@ -2,6 +2,8 @@ import { Get, Inject, Injectable, Query } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { Users } from './interfaces/user.interface';
 import { ResponseShape } from 'src/interfaces/response.interface';
+import { CreateUserDto } from './dto/create-user.dto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -17,6 +19,18 @@ export class UsersService {
       data: users,
       total: totalUsers,
       totalPages: Math.ceil(totalUsers / limit),
+      success: true,
+    };
+  }
+  async createUser(body: CreateUserDto): Promise<ResponseShape> {
+    const { password } = body;
+    const hashedPassword = bcrypt.hash(password);
+    const user = new this.userModel({ ...body, password: hashedPassword });
+    const createdUser = await user.save();
+    return {
+      data: createdUser,
+      message: 'user created successfully',
+      success: true,
     };
   }
 }
