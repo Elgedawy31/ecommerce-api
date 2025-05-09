@@ -1,1 +1,35 @@
-GET  http://localhost:8008/api/categories
+### Get all categories
+GET http://localhost:8008/api/categories
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWUwNDQwODVlNTNlZTc2NTM1YThkNSIsImVtYWlsIjoibW9oYW1lZGVsZ2VkYXd5NDBAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ2Nzk4NDI0fQ.iltwZg51mLKZv__vq9g2bR5BoYJcrdDoqKcumPSyyLY
+
+### Get all categories with pagination
+GET http://localhost:8008/api/categories?page=1&limit=10
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWUwNDQwODVlNTNlZTc2NTM1YThkNSIsImVtYWlsIjoibW9oYW1lZGVsZ2VkYXd5NDBAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ2Nzk4NDI0fQ.iltwZg51mLKZv__vq9g2bR5BoYJcrdDoqKcumPSyyLY
+
+### Get category by ID
+GET http://localhost:8008/api/categories/681e3216044e89fe50d03297
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWUwNDQwODVlNTNlZTc2NTM1YThkNSIsImVtYWlsIjoibW9oYW1lZGVsZ2VkYXd5NDBAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ2Nzk4NDI0fQ.iltwZg51mLKZv__vq9g2bR5BoYJcrdDoqKcumPSyyLY
+
+### Create new category (admin only)
+POST http://localhost:8008/api/categories
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWUwNDQwODVlNTNlZTc2NTM1YThkNSIsImVtYWlsIjoibW9oYW1lZGVsZ2VkYXd5NDBAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ2Nzk4NDI0fQ.iltwZg51mLKZv__vq9g2bR5BoYJcrdDoqKcumPSyyLY
+
+{
+  "name": "Electronics",
+  "description": "Electronic devices and accessories including smartphones, laptops, and other gadgets."
+}
+
+### Update category (admin only)
+PATCH http://localhost:8008/api/categories/681e3216044e89fe50d03297
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWUwNDQwODVlNTNlZTc2NTM1YThkNSIsImVtYWlsIjoibW9oYW1lZGVsZ2VkYXd5NDBAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ2Nzk4NDI0fQ.iltwZg51mLKZv__vq9g2bR5BoYJcrdDoqKcumPSyyLY
+
+{
+  "name": "Updated Electronics",
+  "description": "Updated description for electronic devices and accessories."
+}
+
+### Delete category (admin only)
+DELETE http://localhost:8008/api/categories/681e3216044e89fe50d03297
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWUwNDQwODVlNTNlZTc2NTM1YThkNSIsImVtYWlsIjoibW9oYW1lZGVsZ2VkYXd5NDBAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ2Nzk4NDI0fQ.iltwZg51mLKZv__vq9g2bR5BoYJcrdDoqKcumPSyyLY

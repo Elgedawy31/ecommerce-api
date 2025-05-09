@@ -38,7 +38,7 @@ export class ProductsService {
       });
       return {
         data: updatedProduct,
-        message: 'product created successfully',
+        message: 'product updated successfully',
         success: true,
       };
     }
