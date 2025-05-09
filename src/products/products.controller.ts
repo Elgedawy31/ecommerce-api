@@ -1,4 +1,20 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Patch, Post, Query, UseGuards } from "@nestjs/common";
+import { 
+  Body, 
+  Controller, 
+  Delete, 
+  Get, 
+  HttpException, 
+  HttpStatus, 
+  Param, 
+  Patch, 
+  Post, 
+  Query, 
+  UseGuards,
+  UseInterceptors,
+  UploadedFiles
+} from "@nestjs/common";
+import { FilesInterceptor } from "@nestjs/platform-express";
+import { multerMemoryConfig } from "src/common/config/multer.config";
 import { ProductsService } from "./products.service";
 import { ResponseShape } from "src/interfaces/response.interface";
 import { RolesDecorator } from "src/guards/roles.decorator";
@@ -36,9 +52,13 @@ export class ProductsController{
   @RolesDecorator(['admin'])
   @UseGuards(UsersGuard)
   @Post()
-  async create(@Body() body: CreateProductDto): Promise<ResponseShape> {
+  @UseInterceptors(FilesInterceptor('images', 10, multerMemoryConfig))
+  async create(
+    @Body() body: CreateProductDto,
+    @UploadedFiles() files: Express.Multer.File[]
+  ): Promise<ResponseShape> {
     try {
-      return await this.ProductsService.createProduct(body);
+      return await this.ProductsService.createProduct(body, files);
     } catch (error) {
       // Provide more specific error message
       const errorMessage = error.message || 'Failed to create product';
@@ -55,12 +75,14 @@ export class ProductsController{
   @RolesDecorator(['admin'])
   @UseGuards(UsersGuard)
   @Patch(':id')
+  @UseInterceptors(FilesInterceptor('images', 10, multerMemoryConfig))
   async updateUser(
     @Body() body: UpdateProductDto,
     @Param('id') id: string,
+    @UploadedFiles() files: Express.Multer.File[]
   ): Promise<ResponseShape> {
     try {
-      return await this.ProductsService.updateProduct(id, body);
+      return await this.ProductsService.updateProduct(id, body, files);
     } catch (error) {
       // Provide more specific error message
       const errorMessage = error.message || 'Failed to update product';
@@ -85,6 +107,34 @@ export class ProductsController{
     } catch (error) {
       // Provide more specific error message
       const errorMessage = error.message || 'Failed to delete product';
+      throw new HttpException(
+        {
+          message: errorMessage,
+          error: error.name || 'Bad Request',
+          statusCode: HttpStatus.BAD_REQUEST,
+        },
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+  }
+
+  // Test endpoint for uploading images directly
+  @RolesDecorator(['admin'])
+  @UseGuards(UsersGuard)
+  @Post('upload-images')
+  @UseInterceptors(FilesInterceptor('images', 10, multerMemoryConfig))
+  async uploadImages(
+    @UploadedFiles() files: Express.Multer.File[]
+  ): Promise<ResponseShape> {
+    try {
+      const imageUrls = await this.ProductsService.uploadProductImages(files);
+      return {
+        data: { imageUrls },
+        message: 'Images uploaded successfully',
+        success: true,
+      };
+    } catch (error) {
+      const errorMessage = error.message || 'Failed to upload images';
       throw new HttpException(
         {
           message: errorMessage,

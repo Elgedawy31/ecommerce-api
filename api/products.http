@@ -44,3 +44,92 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWUwNDQwO
 ### Delete product (admin only)
 DELETE http://localhost:8008/api/products/681e3216044e89fe50d03297
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWUwNDQwODVlNTNlZTc2NTM1YThkNSIsImVtYWlsIjoibW9oYW1lZGVsZ2VkYXd5NDBAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ2Nzk4NDI0fQ.iltwZg51mLKZv__vq9g2bR5BoYJcrdDoqKcumPSyyLY
+
+### Upload images directly (admin only)
+# Note: This request must be sent using a tool like Postman or curl
+# as it requires multipart/form-data with file uploads
+# Example curl command:
+# curl -X POST http://localhost:8008/api/products/upload-images \
+#   -H "Authorization: Bearer YOUR_TOKEN" \
+#   -F "images=@/path/to/image1.jpg" \
+#   -F "images=@/path/to/image2.jpg"
+POST http://localhost:8008/api/products/upload-images
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWUwNDQwODVlNTNlZTc2NTM1YThkNSIsImVtYWlsIjoibW9oYW1lZGVsZ2VkYXd5NDBAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ2Nzk4NDI0fQ.iltwZg51mLKZv__vq9g2bR5BoYJcrdDoqKcumPSyyLY
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="images"; filename="example.jpg"
+Content-Type: image/jpeg
+
+< ./example.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+### Create new product with image uploads (admin only)
+# Note: This request must be sent using a tool like Postman or curl
+# as it requires multipart/form-data with file uploads
+# Example curl command:
+# curl -X POST http://localhost:8008/api/products \
+#   -H "Authorization: Bearer YOUR_TOKEN" \
+#   -F "name=New Product" \
+#   -F "description=This is a new product with uploaded images" \
+#   -F "price=199.99" \
+#   -F "stock=25" \
+#   -F "categoryId=681e3216044e89fe50d03297" \
+#   -F "images=@/path/to/image1.jpg" \
+#   -F "images=@/path/to/image2.jpg"
+POST http://localhost:8008/api/products
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWUwNDQwODVlNTNlZTc2NTM1YThkNSIsImVtYWlsIjoibW9oYW1lZGVsZ2VkYXd5NDBAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ2Nzk4NDI0fQ.iltwZg51mLKZv__vq9g2bR5BoYJcrdDoqKcumPSyyLY
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="name"
+
+New Product with Images
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="description"
+
+This is a detailed description of the new product with uploaded images. It has many features.
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="price"
+
+199.99
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="stock"
+
+25
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="categoryId"
+
+681e3216044e89fe50d03297
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="images"; filename="example.jpg"
+Content-Type: image/jpeg
+
+< ./example.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+### Update product with image uploads (admin only)
+# Note: This request must be sent using a tool like Postman or curl
+# as it requires multipart/form-data with file uploads
+PATCH http://localhost:8008/api/products/681e3216044e89fe50d03297
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWUwNDQwODVlNTNlZTc2NTM1YThkNSIsImVtYWlsIjoibW9oYW1lZGVsZ2VkYXd5NDBAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ2Nzk4NDI0fQ.iltwZg51mLKZv__vq9g2bR5BoYJcrdDoqKcumPSyyLY
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="name"
+
+Updated Product Name
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="description"
+
+Updated description for this product with new images.
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="price"
+
+179.99
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="images"; filename="example.jpg"
+Content-Type: image/jpeg
+
+< ./example.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
