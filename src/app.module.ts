@@ -8,6 +8,7 @@ import { AuthModule } from './users/auth/auth.module';
 import { ProductsModule } from './products/products.module';
 import { CategoriesModule } from './categories/categories.module';
 import { CloudinaryModule } from './common/providers/cloudinary.module';
+import { OrdersModule } from './orders/orders.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { CloudinaryModule } from './common/providers/cloudinary.module';
     AuthModule, 
     ProductsModule, 
     CategoriesModule, 
+    OrdersModule ,
     CloudinaryModule,
     ConfigModule.forRoot()
   ],
