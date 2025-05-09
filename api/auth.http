@@ -5,3 +5,14 @@ Content-Type: application/json
   "email":"mohamedelgedawy40@gmail.com",
   "password":"01003098950"
 }
+
+### register user 
+POST    http://localhost:8008/api/auth/register
+Content-Type: application/json
+
+{
+  "email":"mohamedelgedawy40@gmail.com",
+  "password":"01003098950",
+  "name":"mohamed elgedawy"
+  
+}

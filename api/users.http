@@ -1,4 +1,6 @@
 GET  http://localhost:8008/api/users
+Content-Type: application/json 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWUwNDQwODVlNTNlZTc2NTM1YThkNSIsImVtYWlsIjoibW9oYW1lZGVsZ2VkYXd5NDBAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ2Nzk4NDI0fQ.iltwZg51mLKZv__vq9g2bR5BoYJcrdDoqKcumPSyyLY
 
 ### create user with valid data
 POST http://localhost:8008/api/users
