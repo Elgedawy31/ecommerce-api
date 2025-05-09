@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpException,
   HttpStatus,
@@ -76,7 +77,7 @@ export class UsersController {
       return await this.UserServices.updateUser(id, body);
     } catch (error) {
       // Provide more specific error message
-      const errorMessage = error.message || 'Failed to create user';
+      const errorMessage = error.message || 'Failed to update user';
       throw new HttpException(
         {
           message: errorMessage,
@@ -89,7 +90,7 @@ export class UsersController {
   }
   @RolesDecorator(['admin'])
   @UseGuards(UsersGuard)
-  @Patch(':id')
+  @Delete(':id')
   async deleteUser(
     @Param('id') id: string,
   ): Promise<ResponseShape> {
@@ -97,7 +98,7 @@ export class UsersController {
       return await this.UserServices.deleteUser(id);
     } catch (error) {
       // Provide more specific error message
-      const errorMessage = error.message || 'Failed to create user';
+      const errorMessage = error.message || 'Failed to delete user';
       throw new HttpException(
         {
           message: errorMessage,
