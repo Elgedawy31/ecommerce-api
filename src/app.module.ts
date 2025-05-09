@@ -7,10 +7,11 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './users/auth/auth.module';
 import { ProductsModule } from './products/products.module';
 import { CategoriesModule } from './categories/categories.module';
+import { CloudinaryProvider } from './common/providers/cloudinary.provider';
 
 @Module({
   imports: [DatabaseModule, UsersModule, AuthModule , ProductsModule , CategoriesModule, ConfigModule.forRoot()],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService ,CloudinaryProvider],
 })
 export class AppModule {}
