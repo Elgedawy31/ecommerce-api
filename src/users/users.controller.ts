@@ -28,12 +28,17 @@ export class UsersController {
   }
 
   @Post()
-  create(@Body() body: CreateUserDto): Promise<ResponseShape> {
+  async create(@Body() body: CreateUserDto): Promise<ResponseShape> {
    try {
-     return this.UserServices.createUser(body);
+     return await this.UserServices.createUser(body);
    } catch (error) {
-      throw new HttpException(error, HttpStatus.BAD_REQUEST);
-    
+      // Provide more specific error message
+      const errorMessage = error.message || 'Failed to create user';
+      throw new HttpException({
+        message: errorMessage,
+        error: error.name || 'Bad Request',
+        statusCode: HttpStatus.BAD_REQUEST,
+      }, HttpStatus.BAD_REQUEST);
    }
   }
 }

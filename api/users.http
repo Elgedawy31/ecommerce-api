@@ -1,10 +1,12 @@
 GET  http://localhost:8008/api/users
 
-### create user
+### create user with valid data
 POST http://localhost:8008/api/users
 Content-Type: application/json
 
-
 {
   "email": "mohamedelgedawy40@gmail.com",
-  "password": "12345678"}
+  "password": "12345678",
+  "name": "Mohamed Elgedawy"
+}
+

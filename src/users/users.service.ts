@@ -24,7 +24,7 @@ export class UsersService {
   }
   async createUser(body: CreateUserDto): Promise<ResponseShape> {
     const { password } = body;
-    const hashedPassword = bcrypt.hash(password);
+    const hashedPassword = await bcrypt.hash(password, 10); // Added salt rounds and await
     const user = new this.userModel({ ...body, password: hashedPassword });
     const createdUser = await user.save();
     return {
