@@ -5,11 +5,9 @@ import { DatabaseModule } from "../database/database.module";
 import { usersProviders } from "./users.provider";
 import { JwtModule } from "@nestjs/jwt";
 import { ConfigModule } from "@nestjs/config";
-import { AuthModule } from "src/users/auth/auth.module";
 
 @Module({
   imports:[
-    AuthModule,
     DatabaseModule,
     ConfigModule.forRoot(),
     JwtModule.register({
@@ -19,6 +17,6 @@ import { AuthModule } from "src/users/auth/auth.module";
   ] ,
   controllers:[UsersController] , 
   providers:[UsersService, ...usersProviders], 
-  exports:[]
+  exports:[...usersProviders]
 })
 export class UsersModule{}
