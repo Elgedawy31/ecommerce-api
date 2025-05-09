@@ -4,6 +4,7 @@ import { Users } from './interfaces/user.interface';
 import { ResponseShape } from 'src/interfaces/response.interface';
 import { CreateUserDto } from './dto/create-user.dto';
 import * as bcrypt from 'bcrypt';
+import { UpdateUserDto } from './dto/update.user.dto';
 
 @Injectable()
 export class UsersService {
@@ -30,6 +31,34 @@ export class UsersService {
     return {
       data: createdUser,
       message: 'user created successfully',
+      success: true,
+    };
+  }
+  async updateUser(id: string, body: UpdateUserDto): Promise<ResponseShape> {
+    const { password } = body;
+    const hashedPassword = await bcrypt.hash(password, 10); // Added salt rounds and await
+    const user = { ...body, password: hashedPassword };
+    const updatedUser = await this.userModel.findByIdAndUpdate(id, user, {
+      new: true,
+    });
+    return {
+      data: updatedUser,
+      message: 'user created successfully',
+      success: true,
+    };
+  }
+  async getUser(id: string): Promise<ResponseShape> {
+    const user = await this.userModel.findById(id);
+    return {
+      data: user,
+      success: true,
+    };
+  }
+  async deleteUser(id: string): Promise<ResponseShape> {
+    const user = await this.userModel.findByIdAndDelete(id);
+    return {
+      data: user,
+      message: 'user deleted successfully',
       success: true,
     };
   }
