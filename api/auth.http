@@ -1,1 +1,7 @@
-GET   http://localhost:8008/api/auth
+POST    http://localhost:8008/api/auth/login
+Content-Type: application/json
+
+{
+  "email":"mohamedelgedawy40@gmail.com",
+  "password":"01003098950"
+}

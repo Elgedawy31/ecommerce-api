@@ -1,5 +1,7 @@
-import { Body, Controller, Get } from "@nestjs/common";
+import { Body, Controller, Get, HttpException, HttpStatus, Post, ValidationPipe } from "@nestjs/common";
 import { AuthService } from "./auth.service";
+import { ResponseShape } from "src/interfaces/response.interface";
+import { SignInDto } from "../dto/signin.dto";
 
 
 @Controller('auth')
@@ -7,8 +9,13 @@ import { AuthService } from "./auth.service";
 export class  AuthController{
   constructor(private readonly AuthService: AuthService) {}
 
-  @Get()
-  signIn(@Body() body:any){
-    return this.AuthService.signIn()
-  }
+    @Post('login')
+    async login(@Body(new ValidationPipe({whitelist:true})) body:SignInDto) : Promise<ResponseShape | null>{
+        const {email , password} = body
+        try {
+            return await this.AuthService.signIn(email , password)
+        } catch (error) {
+            throw new  HttpException(error , HttpStatus.BAD_REQUEST)
+        }
+    }
 }
