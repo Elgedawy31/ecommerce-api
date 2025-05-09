@@ -1,10 +1,46 @@
-GET  http://localhost:8008/api/products
+### Get all products
+GET http://localhost:8008/api/products
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWUwNDQwODVlNTNlZTc2NTM1YThkNSIsImVtYWlsIjoibW9oYW1lZGVsZ2VkYXd5NDBAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ2Nzk4NDI0fQ.iltwZg51mLKZv__vq9g2bR5BoYJcrdDoqKcumPSyyLY
 
-### create product
+### Get all products with pagination
+GET http://localhost:8008/api/products?page=1&limit=10
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWUwNDQwODVlNTNlZTc2NTM1YThkNSIsImVtYWlsIjoibW9oYW1lZGVsZ2VkYXd5NDBAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ2Nzk4NDI0fQ.iltwZg51mLKZv__vq9g2bR5BoYJcrdDoqKcumPSyyLY
+
+### Get product by ID
+GET http://localhost:8008/api/products/681e3216044e89fe50d03297
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWUwNDQwODVlNTNlZTc2NTM1YThkNSIsImVtYWlsIjoibW9oYW1lZGVsZ2VkYXd5NDBAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ2Nzk4NDI0fQ.iltwZg51mLKZv__vq9g2bR5BoYJcrdDoqKcumPSyyLY
+
+### Create new product (admin only)
 POST http://localhost:8008/api/products
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWUwNDQwODVlNTNlZTc2NTM1YThkNSIsImVtYWlsIjoibW9oYW1lZGVsZ2VkYXd5NDBAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ2Nzk4NDI0fQ.iltwZg51mLKZv__vq9g2bR5BoYJcrdDoqKcumPSyyLY
 
 {
-  "name":""
-
+  "name": "Smartphone XYZ",
+  "description": "Latest smartphone with advanced features and high-performance specifications.",
+  "price": 999.99,
+  "discountPrice": 899.99,
+  "stock": 50,
+  "images": [
+    "https://example.com/images/smartphone1.jpg",
+    "https://example.com/images/smartphone2.jpg"
+  ],
+  "categoryId": "681e3216044e89fe50d03297"
 }
+
+### Update product (admin only)
+PATCH http://localhost:8008/api/products/681e3216044e89fe50d03297
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWUwNDQwODVlNTNlZTc2NTM1YThkNSIsImVtYWlsIjoibW9oYW1lZGVsZ2VkYXd5NDBAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ2Nzk4NDI0fQ.iltwZg51mLKZv__vq9g2bR5BoYJcrdDoqKcumPSyyLY
+
+{
+  "name": "Updated Smartphone XYZ",
+  "description": "Updated description for the latest smartphone with advanced features.",
+  "price": 899.99,
+  "discountPrice": 799.99,
+  "stock": 45
+}
+
+### Delete product (admin only)
+DELETE http://localhost:8008/api/products/681e3216044e89fe50d03297
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWUwNDQwODVlNTNlZTc2NTM1YThkNSIsImVtYWlsIjoibW9oYW1lZGVsZ2VkYXd5NDBAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ2Nzk4NDI0fQ.iltwZg51mLKZv__vq9g2bR5BoYJcrdDoqKcumPSyyLY
