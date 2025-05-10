@@ -1,1 +1,36 @@
-GET http://localhost:8008/api/cart
+@authToken =eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWUwNDQwODVlNTNlZTc2NTM1YThkNSIsImVtYWlsIjoibW9oYW1lZGVsZ2VkYXd5NDBAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ2OTA3MDc5fQ.wd_ddTA94dMvNCSc3F-MoZJ4EI0tl-vxp67xSEI_xrU
+@productId = 681e3216044e89fe50d03297
+@userId = 681e044085e53ee76535a8d5
+
+### Get User's Cart
+GET http://localhost:8008/api/cart?userId={{userId}}
+Authorization: Bearer {{authToken}}
+
+### Add Item to Cart
+POST http://localhost:8008/api/cart?userId={{userId}}
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+  "productId": "{{productId}}",
+  "name": "Sample Product",
+  "price": 29.99,
+  "quantity": 1
+}
+
+### Update Cart Item Quantity
+PUT http://localhost:8008/api/cart/item/{{productId}}?userId={{userId}}
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+  "quantity": 3
+}
+
+### Remove Item from Cart
+DELETE http://localhost:8008/cart/item/{{productId}}?userId={{userId}}
+Authorization: Bearer {{authToken}}
+
+### Clear Cart
+DELETE http://localhost:8008/cart?userId={{userId}}
+Authorization: Bearer {{authToken}}
